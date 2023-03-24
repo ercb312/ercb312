@@ -1,10 +1,5 @@
 ### Hi there 👋
 
-
-**ercb312/ercb312** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
 - 🔭 I’m currently working on CodeUp, DreamHack
 - 🌱 I’m currently learning cyber security & system hacking
 - 👯 I’m looking to collaborate on game developing
