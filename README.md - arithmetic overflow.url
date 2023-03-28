@@ -1,2 +1,50 @@
-[InternetShortcut]
-URL=https://github.com/ercb312/kuality-2023-1/blob/main/README.md%20-%20arithmetic%20overflow
+
+[교재(Warming Up C Programming) 3-9] 
+정수 3개를 화면에서 입력받은 후, 합산 및 평균 결과를 다음과 같이 출력하시오!
+# 주의: 평균이 실수값으로 나오도록 하려면?
+
+#define _CRT_SECURE_NO_WARNINGS 
+#pragma warning(disable:4996)
+#pragma warning(disable:6031)
+#include <stdio.h>
+int main() {
+	int a, b, c;
+
+	printf("Enter 3 values: ");
+	scanf(" %d %d %d", &a, &b, &c);
+
+	printf("%6d\n", a);
+	printf("%6d\n", b);
+	printf("%6d\n", c);
+	printf("--------\n");
+	printf("%6d\n", a + b + c);
+	
+	double ave = (a + b + c); 
+	printf("%6.1lf\n", ave / 3);
+}
+/*
+a + b + c 에 C26451: 산술 오버플로 경고: 4 바이트 값의 '+' 연산자를 사용한 다음 결과를 8 바이트 값에 캐스트합니다.
+C26451: arithmetic overflow warning appeared at a + b + c -> cast the result after using '+' operator of 4 byte value at 8 byte value
+오버플로를 방지하려면 '+' 연산자를 호출하기 전에 더 광범위한 형식에 값을 캐스트합니다(10.2).
+cast value at more extensive form(convention?) before calling '+' operator to prevent overflow(10.2)
+
+BUT no warning at
+*/
+  float ave = (a + b + c);
+  printf("%6.1f\n", ave / 3); 
+ /*
+에서는 warning이 나타나지 않음
+
+  => Question: 왜 경고가 뜨는가? 
+  int, float -> 4byte / double -> 8byte
+  처음 a, b, c를 int(4byte)에 선언함
+  그리고 ave = a + b + c를 double(8byte)에 선언함
+  int와 double의 바이트 값이 다르므로 산술 과정에서 위험이 있을 수 있으니 경고가 뜸 
+  
+  => Question2: 왜 위험한 것인가?
+float와 double은 작은 박스와 큰 박스로 비유할 수 있음 (작은 위험 vs 큰 위험)
+float:  4byte, 소수점 이하 6자리 / double: 8byte, 소수점 이하 15자리
+작은 박스는 용량이 작으므로 적당한 수화물을 넣을 가능성이 높다. 하지만 큰 박스는 용량이 크므로 무리해서 무겁고 큰 수화물을 담을 가능성이 있다.
+float에서 overflow가 발생한 것보다 double에서 overflow가 발생한 것이 위험성이 높다고 볼 수 있다.
+  => executable but potential threat exist
+*/
