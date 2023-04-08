@@ -1,0 +1,124 @@
+Level 0
+ssh bandit0@bandit.labs.overthewire.org -p 2220  
+bandit0
+ls //현재 위치의 파일 목록 조회
+readme
+cat readme //파일의 내용을 화면에 출력
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+
+Level 1 → Level 2
+ssh bandit1@bandit.labs.overthewire.org -p 2220
+password: 
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+ls
+-
+ cat ./-
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+Level 2 → Level 3
+ssh bandit2@bandit.labs.overthewire.org -p 2220
+password: 
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+ls
+spaces in this filename
+cat spaces\ in\ this\ filename
+aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+Level 3 → Level 4
+ ssh bandit3@bandit.labs.overthewire.org -p 2220
+password: 
+aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+ls
+inhere
+cd inhere
+ls -a
+.  ..  .hidden
+ls -al
+.
+..
+.hidden
+cat .hidden
+2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+
+Level 4 → Level 5
+ssh bandit4@bandit.labs.overthewire.org -p 2220
+2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+ls
+inhere
+cd inhere
+ls 
+-file00  -file02  -file04  -file06  -file08
+-file01  -file03  -file05  -file07  -file09
+file -F ./-file* // -F(use string as separator instead of `:')???
+./-file07./-file00 ASCII text
+cat ./-file07
+lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+
+Level 5 → Level 6
+ssh bandit5@bandit.labs.overthewire.org -p 2220
+lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+ls
+inhere
+cd inhere
+ls
+maybehere00  maybehere04  maybehere08  maybehere12  maybehere16
+maybehere01  maybehere05  maybehere09  maybehere13  maybehere17
+maybehere02  maybehere06  maybehere10  maybehere14  maybehere18
+maybehere03  maybehere07  maybehere11  maybehere15  maybehere19
+find ./* -size 1033c
+./maybehere07/.file2
+cat ./maybehere07/.file2
+P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+
+
+
+
+
+Level 6 → Level 7
+ssh bandit6@bandit.labs.overthewire.org -p 2220
+P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+find / -user bandit7 -group bandit6 -size 33c
+/var/lib/dpkg/info/bandit7.password
+cat /var/lib/dpkg/info/bandit7.password
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+
+Level 7 → Level 8
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+ls
+data.txt
+cat data.txt
+뭐고
+grep "millionth" data.txt // “”을 여기서 쓴 걸 복붙하면 안 됨, 글꼴이 달라서 인식이 안 되는듯
+TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+Level 8 → Level 9
+ssh bandit8@bandit.labs.overthewire.org -p 2220
+TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+ls
+data.txt
+cat data.txt
+뭐고
+cat data.txt | sort | uniq -u (https://stackoverflow.com/questions/12782827/how-to-find-the-particular-text-stored-in-the-file-data-txt-and-it-occurs-only)
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+Level 9 → Level 10
+ssh bandit9@bandit.labs.overthewire.org -p 2220
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+ls
+data.txt
+cat data.txt
+strings data.txt //strings는 읽을 수 있는 문자열만 출력해준다
+G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+
+Level 10 → Level 11
+ssh bandit10@bandit.labs.overthewire.org -p 2220
+G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+ls
+data.txt
+cat data.txt
+VGhlIHBhc3N3b3JkIGlzIDZ6UGV6aUxkUjJSS05kTllGTmI2blZDS3pwaGxYSEJNCg==
+base64 -di data.txt (or https://www.base64decode.org/)
+The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+
